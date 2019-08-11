@@ -1,3 +1,5 @@
+# https://keraskorea.github.io/posts/2018-10-23-keras_autoencoder/
+
 ############# 데이터 ###################
 from keras.datasets import mnist
 import numpy as np
