@@ -1,0 +1,23 @@
+{% for row in rows %}
+
+<form action = "{{ url_for('addrec') }}" method = "POST">
+<table>
+
+<tr>
+<td>
+{{row[1]}} 
+</td>
+<td>
+<input type = "text" name = "war" value = {{row[2]}}> <br>
+</td>
+<br>
+
+ <tr>
+    <td>
+        <input type=hidden name=id value={{row[0]}}>
+ 
+        <input type = "submit" value = "확인" /><br> 
+    </td>
+ </form>
+ 
+{% endfor %}
