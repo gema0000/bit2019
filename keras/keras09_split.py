@@ -10,7 +10,7 @@ x_val = x[60:80]
 x_test = x[80:]
 y_train = y[:60]
 y_val = y[60:80]
-y_test = yyy[80:]
+y_test = y[80:]
 
 #2. 모델구성
 from keras.models import Sequential
