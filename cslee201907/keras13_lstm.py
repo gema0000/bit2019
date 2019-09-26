@@ -29,4 +29,4 @@ x_input = array([6, 7, 8])       # 70, 80, 90 => ?
 x_input = x_input.reshape((1, 3, 1))
 yhat = model.predict(x_input, verbose=0)
 print(yhat)
-'''
+
