@@ -3,8 +3,11 @@ import numpy as np
 
 x1 = np.array([range(100), range(311,411), range(100)])
 y1 = np.array([range(501,601), range(711,811), range(100)])
+
 x2 = np.array([range(100,200), range(311,411), range(100,200)])
 y2 = np.array([range(501,601), range(711,811), range(100)])
+
+# x3
 
 x1 = np.transpose(x1)
 y1 = np.transpose(y1)
@@ -47,8 +50,12 @@ input2 = Input(shape=(3,))
 dense2 = Dense(50, activation='relu')(input2)
 dense2_2 = Dense(7)(dense2)
 
+# input3 = Input(shape=(3,))
+# dense3 = Dense(50, activation='relu')(input3)
+# dense2_3 = Dense(7)(dense3)
+
 from keras.layers.merge import concatenate
-merge1 = concatenate([dense1_3, dense2_2])
+merge1 = concatenate([dense1_3, dense2_2, dense2_3])
 
 middle1 = Dense(10)(merge1)
 middle2 = Dense(5)(middle1)
@@ -72,6 +79,8 @@ model.summary()
 #3. 훈련
 # model.compile(loss='mse', optimizer='adam', metrics=['accuracy'])
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
+# model.compile(loss=['mse', 'mae'], optimizer='adam', metrics=['mse'])
+
 # model.fit(x, y, epochs=100, batch_size=3)
 model.fit([x1_train, x2_train], [y1_train, y2_train],
           epochs=1, batch_size=1,
