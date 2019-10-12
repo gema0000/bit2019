@@ -6,7 +6,7 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import GridSearchCV
 
 # 붓꽃 데이터 읽어 들이기
-iris_data = pd.read_csv("./data/iris2.csv", encoding="utf-8")
+iris_data = pd.read_csv("./_data/csv/iris2.csv", encoding="utf-8")
 
 # 붓꽃 데이터를 레이블과 입력 데이터로 분리하기
 y = iris_data.loc[:,"Name"]
@@ -22,11 +22,20 @@ parameters = [
     {"C": [1, 10, 100, 1000], "kernel":["sigmoid"], "gamma": [0.001, 0.0001]}
 ]
 
+'''
 # 그리드 서치 --- (*2)
 kfold_cv = KFold(n_splits=5, shuffle=True)
 clf = GridSearchCV( SVC(), parameters, cv=kfold_cv)
 clf.fit(x_train, y_train)
 print("최적의 매개 변수 = ", clf.best_estimator_)
+'''
+
+# 그리드 서치 --- (*2)
+# kfold_cv = KFold(n_splits=5, shuffle=True)
+clf = GridSearchCV( SVC(), parameters, cv=5, return_train_score=True)
+clf.fit(x_train, y_train)
+print("최적의 매개 변수 = ", clf.best_estimator_)
+
 
 # 최적의 매개 변수로 평가하기 --- (*3)
 y_pred = clf.predict(x_test)

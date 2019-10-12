@@ -6,7 +6,7 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import GridSearchCV
 
 # 붓꽃 데이터 읽어 들이기
-iris_data = pd.read_csv("./data/iris2.csv", encoding="utf-8")
+iris_data = pd.read_csv("./_data/csv/iris2.csv", encoding="utf-8")
 
 # 붓꽃 데이터를 레이블과 입력 데이터로 분리하기
 y = iris_data.loc[:,"Name"]
