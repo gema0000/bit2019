@@ -49,7 +49,7 @@ def mean_absolute_percentage_error(y_true, y_pred):
 
 def main():
     ###예측에 쓰이는 기간
-    size = 100
+    size = 24
     pre_day = 1
     # train.csv를 이용해 Visibility을 예측하는 모델을 만든후
     # test.csv의 Visibility을 예측해보세요.
@@ -65,18 +65,15 @@ def main():
     data_test = data_test.drop(['Formatted Date','Precip Type'],axis=1)
     col_train = data_train.columns
     col_test = data_test.columns
-    
-    
+       
     # test.csv의 datetime 순서대로 [Formatted Date, Visibility]를 가지는 dataframe을
     # return 하도록 합니다.
-   
-    
+       
     train_set, test_set = label_col(data_train,data_test)
     m = MinMaxScaler()                                      #  전처리
     train_set = m.fit_transform(train_set)
     test_set = m.transform(test_set)
  
-
     ##TRAIN 데이터와 LABEL데이터를 나누는 곳
     def split_(seq, size):
         aaa=[]
@@ -111,8 +108,7 @@ def main():
     # test_set = np.vstack([train_set[-size:],test_set])
     train_set = split_(train_set,size)
     test_set = split_(test_set,size)
-    
-    
+        
     print("test_set",test_set.shape)
     
     # train_set = train_set.reshape(train_set.shape[0],train_set.shape[1],train_set.shape[2])
@@ -120,7 +116,6 @@ def main():
     print("train_Set",train_set.shape)
     print(train_label.shape)
     x_train, x_test, y_train, y_test = train_test_split(train_set, train_label, random_state=66,test_size=0.2)
-
 
     print(x_train.shape)#(44995, 5,6)
 
@@ -131,8 +126,7 @@ def main():
     # model.add(LSTM(64,activation="relu",return_sequences=True))
     # model.add(LSTM(64,activation="relu",return_sequences=True))
     # model.add(LSTM(100,activation="relu"))
-
-    
+    #   
     # model.add(Dense(3000, activation="relu"))
    
     model.add(Dense(1000, activation="relu"))
@@ -143,13 +137,14 @@ def main():
     model.add(Dropout(0.2))
     model.add(Dense(32, activation='relu'))
     model.add(Dense(1))
+
     import keras
-    op = keras.optimizers.Adam(lr=0.001)
+    op = keras.optimizers.Adam(lr=0.0001)
     model.compile(optimizer=op, loss="mae", metrics=["mae"])
     # true = pd.read_csv("./Visibility/data/sample_an.csv")
     # true = true["Visibility"]
 
-    model.fit(x_train, y_train,batch_size=64, epochs=100)
+    model.fit(x_train, y_train,batch_size=128, epochs=30)   # 64, 50
     loss=model.evaluate(x_test,y_test)
     print(loss)
 
@@ -163,7 +158,6 @@ def main():
     #         break
     #     model.reset_states()    
        
-
     data_sample['Visibility'] = model.predict(test_set)
     print(data_sample)
     data_sample.to_csv('./_data/csv/hackerton/predict_before.csv', index=False)
@@ -176,5 +170,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
