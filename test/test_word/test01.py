@@ -10,7 +10,8 @@ token.fit_on_texts([text])
 encoded = token.texts_to_sequences([text])
 # encoded = token.texts_to_sequences([text])[0]
 
-print(encoded)
+print(encoded)  # [[2, 3, 1, 4, 5, 6, 1, 7, 8, 1, 9, 10, 1, 11]]
+print('len(encoded[0]) : {0}, {1}'.format(len(encoded[0]), "우갸갹"))
 
 vocab_size = len(token.word_index) + 1  # 12
 # 케라스 토크나이저의 정수 인코딩은 인덱스가 1부터 시작하지만,
