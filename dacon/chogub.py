@@ -19,6 +19,7 @@ print('train shape: ',train.shape)
 print('test shape: ',test.shape)
 print('submission shape: ',submission.shape)
 
+
 # 문자열인 'Time'을 datetime의 형태로 변환합니다.
 # 'Time'열을 index로 전환해주는 작업을 통해, 각 세대 전력량만 활용하게 하였습니다.
 train['Time'] = pd.to_datetime(train.Time) #날짜 형식으로 변환 작업을 합니다.
@@ -29,19 +30,24 @@ test = test.set_index('Time')
 
 print(train.head(3))
 
-_, ax = plt.subplots(1,2, figsize=(15,5)) #train, test를 한 번에 비교하기 위해, 그래프 창을 2개로 만듭니다.
-# train.isnull().mean(axis=0) #각 세대별 이름과 결측치 비율이 나열됩니다.
-sns.distplot(train.isnull().mean(axis=0), ax=ax[0]) #나열된 값을 distplot을 이용해 시각화 하고, 이를 첫 번째 그래프 창에 넣습니다.
-ax[0].set_title('Distribution of Missing Values Percentage in Train set')
+# _, ax = plt.subplots(1,2, figsize=(15,5)) #train, test를 한 번에 비교하기 위해, 그래프 창을 2개로 만듭니다.
+# # train.isnull().mean(axis=0) #각 세대별 이름과 결측치 비율이 나열됩니다.
+# sns.distplot(train.isnull().mean(axis=0), ax=ax[0]) #나열된 값을 distplot을 이용해 시각화 하고, 이를 첫 번째 그래프 창에 넣습니다.
+# ax[0].set_title('Distribution of Missing Values Percentage in Train set')
 
-sns.distplot(test.isnull().mean(axis=0), ax=ax[1]) #test data에서의 결측치 비율을 시각화 하고, 이를 두 번째 그래프 창에 넣습니다.
-ax[1].set_title('Distribution of Missing Values Percentage in Test set')
+
+# sns.distplot(test.isnull().mean(axis=0), ax=ax[1]) #test data에서의 결측치 비율을 시각화 하고, 이를 두 번째 그래프 창에 넣습니다.
+# ax[1].set_title('Distribution of Missing Values Percentage in Test set')
 # plt.show()
 
 answer = test.median(axis=0).sort_index() #각 세대 별 중앙에 위치한 값인 중앙값을 계산합니다.
+print(answer)
+print(answer.shape)     # 200,
 
 avg_submission = submission.copy() #원본 데이터 보존을 위한 데이터 복사
 avg_submission = avg_submission.set_index('meter_id') #'meter_id'를 기본 index로 설정합니다.
+
+print(type(avg_submission)) # <class 'pandas.core.frame.DataFrame'>
 
 for i in range(24):
     avg_submission.iloc[:,i] = answer #각 세대, 시간별 예측 값을 넣습니다. #시간별 예측 값은 중앙값으로 동일합니다
@@ -61,4 +67,4 @@ avg_submission.iloc[:,34:] = months #미리 만들어둔 각 세대, 월별 예�
 
 print(avg_submission.head())
 
-avg_submission.to_csv('./_data/dacon/dacon_baseline_1012_1.csv', index=False)
+avg_submission.to_csv('./_data/dacon/dacon_baseline_1021_1.csv', index=False)
