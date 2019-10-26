@@ -15,7 +15,6 @@ y = cancer.target
 
 # print(y.value_counts())
 
-
 # 정규화
 # scaler = StandardScaler()
 scaler = MinMaxScaler()

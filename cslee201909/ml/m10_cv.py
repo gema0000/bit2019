@@ -1,9 +1,11 @@
 from sklearn.model_selection import cross_val_score
 from sklearn.datasets import load_iris
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression,SVC
 
 iris = load_iris()
 model = LogisticRegression()
+# model = SVC()
+
 
 # score = cross_val_score(model, iris.data, iris.target)  
 # 디폴트는 3겹교차검증, sk-learn 0.22 부터 5겹교차검증

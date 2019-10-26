@@ -51,8 +51,8 @@ model.add(conv_base)
 model.add(layers.Dense(256, activation='relu'))
 model.add(layers.Dense(10, activation='softmax'))
 model.summary()
-'''
 
+'''
 model.compile(loss='categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])

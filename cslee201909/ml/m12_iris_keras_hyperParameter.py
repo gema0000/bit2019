@@ -15,7 +15,7 @@ from keras.models import Sequential
 from keras.layers import Dense, LSTM
 
 # 붓꽃 데이터 읽어 들이기
-iris_data = pd.read_csv("./data/iris.csv", encoding='utf-8',
+iris_data = pd.read_csv("./_data/csv/iris.csv", encoding='utf-8',
                         names=['a', 'b', 'c', 'd', 'y'])
 # print(iris_data)
 # 붓꽃 데이터를 레이블과 입력 데이터로 분리하기
@@ -90,3 +90,4 @@ search = RandomizedSearchCV(estimator=model,
 search.fit(x_train, y_train) # 데이터 집어넣기!
 
 print(search.best_params_)
+

@@ -9,7 +9,7 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 
 # 붓꽃 데이터 읽어 들이기
-iris_data = pd.read_csv("./data/iris2.csv", encoding="utf-8")
+iris_data = pd.read_csv("./_data/csv/iris2.csv", encoding="utf-8")
 
 # 붓꽃 데이터를 레이블과 입력 데이터로 분리하기
 y = iris_data.loc[:,"Name"]
@@ -26,17 +26,17 @@ parameters = [
 ]
 
 from sklearn.pipeline import Pipeline
-# from sklearn.pipeline import make_pipeline
+from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
-pipe = Pipeline([("scaler", MinMaxScaler()), ("svm", SVC())])
-# pipe2= make_pipeline(MinMaxScaler(), SVC(C=100))
+# pipe = Pipeline([("scaler", MinMaxScaler()), ("svm", SVC())])
+pipe= make_pipeline(MinMaxScaler(), SVC(C=100))
 
 # 그리드 서치 --- (*2)
 kfold_cv = KFold(n_splits=5, shuffle=True)
 # clf = GridSearchCV( pipe, parameters, cv=kfold_cv)
 clf = RandomizedSearchCV(pipe, parameters, cv=5)
 
-clf.fit(x_train, y_train)
+clf.fit(x_train, y_train)                           # error
 print("최적의 매개 변수 = ", clf.best_estimator_)
 
 # 최적의 매개 변수로 평가하기 --- (*3)

@@ -10,7 +10,7 @@ from keras.applications import InceptionResNetV2
 conv_base = VGG16(weights='imagenet', include_top=False,
                   input_shape=(150,150,3))
 # conv_base = VGG16()   # 224,224,3
-conv_base.summary()
+# conv_base.summary()
 
 from keras import models, layers
 model = models.Sequential()
