@@ -43,7 +43,7 @@ encoder.summary()
 decoder.summary()
 
 
-
+'''
 autoencoder.compile(optimizer='adadelta', 
                     loss='binary_crossentropy', metrics=['accuracy'])
 # autoencoder.compile(optimizer='adadelta', 
@@ -128,7 +128,7 @@ print(loss, acc)
 
 # 실습2 : CNN으로 변경하시오.  
 # m28_autoencoder2_cnn.py    
-
+'''
 
 
 
